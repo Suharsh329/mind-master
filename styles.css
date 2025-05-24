@@ -1,0 +1,747 @@
+/* General Styles */
+:root {
+    --primary-color: #6A1B9A; /* Purple */
+    --secondary-color: #FF6F00; /* Orange */
+    --background-color: #F3E5F5; /* Light Purple */
+    --text-color: #333;
+    --card-bg-color: #fff;
+    --card-text-color: #6A1B9A;
+    --button-bg-color: #FF6F00;
+    --button-text-color: #fff;
+    --modal-bg-color: #fff;
+    --modal-header-bg-color: #6A1B9A;
+    --modal-header-text-color: #fff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', 'Arial', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    margin: 0; /* Ensure no default margin */
+}
+
+.game-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px; /* Increased margin */
+    flex-wrap: wrap;
+    padding: 10px 0; /* Added padding */
+    border-bottom: 1px solid var(--primary-color); /* Added border */
+}
+
+h1 {
+    color: var(--primary-color);
+    text-align: center;
+    width: 100%;
+    margin-bottom: 20px; /* Increased margin */
+    font-size: 2.5em; /* Larger font size */
+}
+
+h2, h3 {
+    color: var(--modal-header-text-color); /* Changed to use variable */
+    margin-bottom: 15px;
+}
+
+.controls {
+    display: flex;
+    gap: 12px; /* Slightly increased gap */
+    margin: 0 auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+button {
+    padding: 10px 20px; /* Increased padding */
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border: none;
+    border-radius: 5px; /* Slightly more rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-weight: bold;
+    text-transform: uppercase; /* Uppercase text */
+    letter-spacing: 0.5px; /* Added letter spacing */
+    font-family: inherit; /* Ensure buttons inherit the body font */
+}
+
+button:hover {
+    background-color: #E65100; /* Darker shade of orange */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+button:active {
+    background-color: #BF360C; /* Even darker orange */
+    transform: translateY(0);
+}
+
+/* Warning button style for penalizing */
+.btn-warning {
+    background-color: #D32F2F; /* A cautionary red */
+    color: white;
+}
+
+.btn-warning:hover {
+    background-color: #C62828; /* Darker red on hover */
+}
+
+.btn-warning:active {
+    background-color: #B71C1C;
+}
+
+#board-indicator {
+    padding: 10px 20px; /* Matched button padding */
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    border-radius: 5px;
+    font-weight: bold;
+    border: 1px solid var(--primary-color);
+}
+
+/* Players Bar */
+.players-bar {
+    display: flex;
+    gap: 10px; /* Reduced gap */
+    margin-bottom: 25px; /* Slightly reduced margin */
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center; /* Align items vertically, including button */
+    padding: 8px; /* Reduced padding */
+    background-color: var(--primary-color);
+    border-radius: 6px; /* Slightly smaller radius */
+}
+
+.player-bar-adjust-btn {
+    /* Uses general button styles already */
+    /* Specific overrides or additions if needed: */
+    padding: 8px 15px; /* Slightly smaller padding to fit bar */
+    /* background-color: var(--secondary-color); /* Optional: different color */
+    /* color: white; */
+    margin-left: 10px; /* Space from last player card */
+}
+
+.player-card {
+    background-color: var(--card-bg-color);
+    color: var(--card-text-color);
+    padding: 10px 15px; /* Reduced padding */
+    border-radius: 5px; /* Matched button radius */
+    text-align: center;
+    min-width: 140px; /* Reduced min-width */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.player-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    cursor: pointer;
+}
+
+.player-name {
+    font-weight: bold;
+    margin-bottom: 5px; /* Reduced margin */
+    font-size: 1em; /* Reduced font size */
+}
+
+.player-score {
+    font-size: 1.5em; /* Reduced font size */
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+.active-player {
+    background-color: var(--secondary-color);
+    color: var(--button-text-color);
+    box-shadow: 0 0 12px rgba(255, 111, 0, 0.6); /* Orange glow */
+}
+
+.active-player .player-score {
+    color: var(--button-text-color); /* Score color matches text in active state */
+}
+
+/* Board Styles */
+#board-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px; /* Increased gap */
+    margin-top: 20px;
+}
+
+.category {
+    background-color: var(--primary-color);
+    color: var(--button-text-color); /* Using button text color for contrast */
+    padding: 15px 10px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 6px; /* Matched player card radius */
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1em; /* Slightly larger font */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.card {
+    background-color: var(--card-bg-color);
+    color: var(--card-text-color);
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 28px; /* Larger font size for points */
+    border-radius: 6px; /* Matched player card radius */
+    cursor: pointer;
+    height: 110px; /* Slightly taller cards */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 1px solid #ddd;
+}
+
+.card:hover {
+    transform: scale(1.05); /* Slightly larger scale on hover */
+    background-color: #fdfdfd;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.card.revealed {
+    background-color: #BDBDBD; /* Neutral gray for revealed cards */
+    color: #757575;
+    cursor: default;
+    font-size: 1em; /* Smaller text for revealed state if needed */
+    /* Potentially add an icon or different text style for revealed */
+}
+
+.card.revealed:hover {
+    transform: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: #BDBDBD;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Slightly darker overlay */
+    z-index: 1000; /* Ensure modals are on top */
+    overflow-y: auto;
+    padding: 20px; /* Add padding for smaller screens */
+}
+
+.modal-content {
+    background-color: var(--modal-bg-color);
+    color: var(--text-color);
+    width: 90%; /* Responsive width */
+    max-width: 700px; /* Max width for larger screens */
+    margin: 5vh auto; /* Centered with vertical margin */
+    padding: 0; /* Remove padding, will be handled by inner elements */
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-header {
+    background-color: var(--modal-header-bg-color);
+    color: var(--modal-header-text-color);
+    padding: 15px 25px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.modal-body {
+    padding: 25px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.modal-footer {
+    padding: 15px 25px;
+    background-color: #f9f9f9; /* Light gray footer */
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    gap: 10px;
+}
+
+.editor-content {
+    /* max-width: 900px; Removed, handled by modal-content */
+    /* max-height: 80vh; Removed, handled by modal-content structure */
+    /* overflow-y: auto; Handled by modal-body */
+    display: flex;
+    flex-direction: column; /* Ensure editor content flows vertically */
+}
+
+.question-text {
+    font-size: 1.8em; /* Larger question text */
+    margin-bottom: 25px;
+    text-align: center;
+    min-height: 80px; /* Adjusted min-height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+}
+
+#answer-input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 25px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border-color 0.2s;
+}
+
+#answer-input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.player-select-area {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.player-select-area p {
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.player-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+/* .player-buttons button is already styled by the general button style */
+
+.modal-buttons {
+    /* This class might be redundant if modal-footer is used consistently */
+    /* display: flex; */
+    /* justify-content: center; */
+    /* gap: 10px; */
+    /* margin-bottom: 20px; */
+    /* flex-wrap: wrap; */
+    /* If used outside modal-footer, it should be styled like modal-footer */
+    padding-top: 15px; /* Add some space if it's directly in modal-body */
+}
+
+.answer-reveal {
+    background-color: var(--background-color);
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    display: none; /* Keep hidden by default */
+    margin-top: 20px;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.post-reveal-actions {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    text-align: center;
+}
+
+.post-reveal-actions p {
+    margin-bottom: 10px;
+}
+
+.post-reveal-actions .player-buttons button {
+    margin: 5px; /* Ensure spacing if buttons wrap */
+}
+
+/* Player Management Modal specific adjustments */
+/* Assuming .modal-content contains a .modal-header, .modal-body, .modal-footer */
+
+.player-list {
+    margin-bottom: 20px;
+    max-height: 250px; /* Adjusted max-height */
+    overflow-y: auto;
+    background-color: #f9f9f9; /* Lighter background */
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #eee;
+}
+
+.player-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px; /* Adjusted padding */
+    border-bottom: 1px solid #e0e0e0; /* Lighter border */
+    background-color: #fff; /* Ensure white background for items */
+}
+
+.player-list-item:last-child {
+    border-bottom: none;
+}
+
+.player-list-item-name {
+    flex-grow: 1;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 3px;
+    transition: background-color 0.2s;
+}
+
+.player-list-item-name:hover {
+    background-color: #efefef;
+}
+
+.inline-edit-input {
+    flex-grow: 1;
+    padding: 4px 8px;
+    border: 1px solid var(--primary-color);
+    border-radius: 3px;
+    font-size: inherit; /* Match surrounding text */
+    font-family: inherit;
+    margin-right: 5px; /* Space between inline inputs if multiple appear */
+}
+
+.inline-edit-textarea {
+    flex-basis: 100%; /* Take full width when editing q/a text */
+    padding: 6px 8px;
+    border: 1px solid var(--primary-color);
+    border-radius: 3px;
+    font-size: inherit;
+    font-family: inherit;
+    min-height: 60px; /* Decent default height */
+    resize: vertical;
+    margin-top: 5px; /* Space if it wraps below points */
+    margin-bottom: 5px;
+}
+
+.question-list-item .list-item-content span,
+.question-list-item .list-item-content em {
+    margin-left: 4px; /* Tiny space before question/answer text */
+}
+
+.remove-player {
+    background-color: #f44336;
+}
+
+.add-player-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#new-player-name {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Styles for new modal close button */
+.close-modal-btn {
+    background: none;
+    border: none;
+    color: var(--modal-header-text-color); /* Or a contrasting color if header bg is light */
+    font-size: 1.8em;
+    cursor: pointer;
+    padding: 0 5px;
+    line-height: 1;
+}
+
+.close-modal-btn:hover {
+    color: #e0e0e0; /* Slightly lighter color on hover */
+    transform: none; /* Override general button hover */
+    background-color: transparent; /* Override general button hover */
+}
+
+/* Game Editor Styles */
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.tab-btn {
+    padding: 10px 15px;
+    background-color: transparent;
+    color: var(--text-color);
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    transition: color 0.2s, border-bottom-color 0.2s;
+    font-size: 1em;
+    text-transform: uppercase; /* Match other buttons */
+    letter-spacing: 0.5px; /* Match other buttons */
+}
+
+.tab-btn:hover {
+    color: var(--primary-color);
+    background-color: transparent; /* Override general button hover */
+    transform: none; /* Override general button hover */
+}
+
+.tab-btn.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+    font-weight: bold;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Styling for select, textarea, input fields within modals for consistency */
+.modal-body select,
+.modal-body textarea,
+.modal-body input[type="text"],
+.modal-body input[type="number"] {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border-color 0.2s;
+}
+
+.modal-body select:focus,
+.modal-body textarea:focus,
+.modal-body input[type="text"]:focus,
+.modal-body input[type="number"]:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.modal-body textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+#boards-list, #categories-list, #questions-list {
+    margin-bottom: 20px;
+    max-height: 250px;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.list-item {
+    background-color: #fff;
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list-item:last-child {
+    margin-bottom: 0;
+}
+
+.list-item-content {
+    flex-grow: 1;
+    display: flex; /* To align parts of question if they wrap */
+    flex-wrap: wrap; /* Allow parts to wrap */
+    align-items: baseline; /* Align text baselines */
+}
+
+.editable-item {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 3px;
+    transition: background-color 0.2s;
+}
+
+.editable-item:hover {
+    background-color: #efefef;
+}
+
+.list-item-actions button {
+    margin-left: 8px;
+    padding: 6px 10px; /* Smaller padding for action buttons */
+    text-transform: none; /* Normal case for these buttons */
+    letter-spacing: 0;
+}
+
+/* Specific button colors for edit/delete if needed */
+.edit-item-btn {
+    /* background-color: var(--primary-color); /* Example */
+}
+
+.delete-item-btn {
+    background-color: #E53935; /* A modern red for delete */
+}
+.delete-item-btn:hover {
+    background-color: #C62828; /* Darker red on hover */
+}
+
+.add-question-form, .add-category-form, .add-player-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+.add-question-form h3, .add-category-form h3, .add-player-form h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .game-container {
+        padding: 10px;
+    }
+    
+    h1 {
+        font-size: 2em;
+    }
+    
+    .controls {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .controls button,
+    #board-indicator {
+        width: 100%;
+        text-align: center;
+    }
+
+    #board-container {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 8px;
+    }
+
+    .category {
+        height: 60px;
+        font-size: 0.9em;
+    }
+
+    .card {
+        height: 80px;
+        font-size: 1.5em;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 2.5vh auto;
+    }
+
+    .modal-header {
+        padding: 12px 15px;
+    }
+    .modal-header h2 {
+        font-size: 1.3em;
+    }
+
+    .modal-body {
+        padding: 15px;
+    }
+
+    .modal-footer {
+        padding: 12px 15px;
+        flex-direction: column; /* Stack buttons in footer */
+    }
+    .modal-footer button {
+        width: 100%;
+    }
+    
+    .question-text {
+        font-size: 1.3em;
+    }
+    
+    .tabs {
+        flex-wrap: wrap; /* Allow tabs to wrap */
+    }
+
+    .tab-btn {
+        padding: 8px 10px;
+        font-size: 0.9em;
+    }
+
+    .player-card {
+        min-width: 120px;
+        padding: 10px 15px;
+    }
+
+    .player-name {
+        font-size: 1em;
+    }
+
+    .player-score {
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8em;
+    }
+    .category {
+        font-size: 0.8em;
+    }
+    .card {
+        font-size: 1.2em;
+    }
+    .question-text {
+        font-size: 1.1em;
+        min-height: 60px;
+    }
+    #answer-input {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+    .modal-header h2 {
+        font-size: 1.1em;
+    }
+    .tab-btn {
+        flex-grow: 1; /* Make tabs take full width if they wrap */
+    }
+}

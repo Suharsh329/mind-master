@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindMaster</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>MindMaster</h1>
+            <div class="controls">
+                <button id="new-game">New Game</button>
+                <button id="edit-game">Edit Game</button>
+                <button id="manage-players">Manage Players</button>
+                <button id="prev-board">Previous Board</button>
+                <button id="next-board">Next Board</button>
+                <span id="board-indicator">Board: 1/1</span>
+            </div>
+        </header>
+        
+        <div id="players-bar" class="players-bar"></div>
+        
+        <div id="board-container"></div>
+        
+        <div id="question-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Question</h2>
+                    <button id="close-modal-question" class="close-modal-btn">&times;</button> 
+                </div>
+                <div class="modal-body">
+                    <div class="question-text"></div>
+                    <div class="player-select-area">
+                        <p>Select player to answer (to assign points):</p>
+                        <div id="player-buttons" class="player-buttons"></div>
+                        <button id="penalize-incorrect-pre-reveal" class="btn-warning" style="margin-top: 10px;">Penalize Selected Player (-)</button>
+                    </div>
+                    <div class="answer-reveal"></div>
+                    <div id="post-reveal-actions" class="post-reveal-actions" style="display: none;">
+                        <div class="player-select-area-post" style="margin-bottom: 10px;">
+                            <p>Confirm/Select player for scoring:</p>
+                            <div id="player-buttons-post" class="player-buttons"></div>
+                        </div>
+                        <button id="award-points-correct">Correct (+)</button>
+                        <button id="deduct-points-incorrect">Incorrect (-)</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="reveal-answer">Reveal Answer</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Player Management Modal -->
+        <div id="player-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Manage Players/Teams</h2>
+                    <button id="close-player-modal" class="close-modal-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="player-list" id="player-list"></div>
+                    <div class="add-player-form">
+                        <input type="text" id="new-player-name" placeholder="New player/team name">
+                        <button id="add-player">Add Player/Team</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Game Editor Modal -->
+        <div id="editor-modal" class="modal">
+            <div class="modal-content editor-content">
+                <div class="modal-header">
+                    <h2>Game Editor</h2>
+                    <button id="close-editor-modal" class="close-modal-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="boards">Boards</button>
+                        <button class="tab-btn" data-tab="categories">Categories</button>
+                        <button class="tab-btn" data-tab="questions">Questions</button>
+                    </div>
+                    
+                    <div class="tab-content active" id="boards-tab">
+                        <h3>Boards</h3>
+                        <div id="boards-list"></div>
+                        <button id="add-board">Add New Board</button>
+                    </div>
+                    
+                    <div class="tab-content" id="categories-tab">
+                        <h3>Categories</h3>
+                        <select id="board-select-categories"></select>
+                        <div id="categories-list"></div>
+                        <div class="add-category-form">
+                            <input type="text" id="new-category-name" placeholder="New category name">
+                            <button id="add-category">Add Category</button>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="questions-tab">
+                        <h3>Questions</h3>
+                        <select id="board-select-questions"></select>
+                        <select id="category-select-questions"></select>
+                        <div id="questions-list"></div>
+                        <div class="add-question-form">
+                            <input type="number" id="new-question-points" placeholder="Points" min="100" step="100" value="100">
+                            <textarea id="new-question-text" placeholder="Question"></textarea>
+                            <textarea id="new-question-answer" placeholder="Answer"></textarea>
+                            <button id="add-question">Add Question</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button id="save-game-edits">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Adjust Score Modal -->
+    <div id="adjust-score-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Adjust Score</h2>
+                <button id="close-adjust-score-modal" class="close-modal-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Select Player:</p>
+                <select id="adjust-score-player-select"></select>
+                <p style="margin-top: 15px;">Points to Adjust:</p>
+                <input type="number" id="adjust-score-points-input" placeholder="Enter points" value="100" step="50">
+            </div>
+            <div class="modal-footer">
+                <button id="adjust-score-add-btn">Add Points</button>
+                <button id="adjust-score-deduct-btn" class="btn-warning">Deduct Points</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Final Scores Modal -->
+    <div id="final-scores-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Board Cleared! Final Scores</h2>
+                <!-- No 'x' close button to make it undismissible by default -->
+            </div>
+            <div class="modal-body">
+                <div id="final-scores-list">
+                    <!-- Scores will be populated here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="final-scores-new-game-btn">Start New Game</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js" type="module"></script>
+    <script src="editor.js" type="module"></script>
+</body>
+</html>
