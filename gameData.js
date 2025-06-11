@@ -84,7 +84,7 @@ const defaultGameData = {
           {
             points: 200,
             question:
-              "Colorful nickname for November 27, 2020, knowing that Thanksgiving is November 26",
+              "Colorful nickname for November 28, 2025, knowing that Thanksgiving is November 27",
             answer: "What is Black Friday?",
             revealed: false,
           },
@@ -143,7 +143,7 @@ const defaultGameData = {
             points: 800,
             question:
               "This small glass container can begin with 'v' or with 'ph'",
-            answer: "What is a vial(phial)?",
+            answer: "What is a vial (phial)?",
             revealed: false,
           },
           {
@@ -170,7 +170,7 @@ const defaultGameData = {
           },
           {
             points: 600,
-            question: "TThe North Star is part of this famous grouping within Ursa Minor",
+            question: "The North Star is part of this famous grouping within Ursa Minor",
             answer: "What is the Little Dipper?",
             revealed: false,
           },
