@@ -1,5 +1,5 @@
 // Import game data
-import { defaultGameData } from './gameData.js';
+import { defaultGameData } from './gameData2.js';
 // Import editor functions
 import { openGameEditor, initEditorEventListeners } from './editor.js';
 
