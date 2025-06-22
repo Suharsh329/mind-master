@@ -11,31 +11,31 @@ const defaultGameData = {
       questions: [
         [
           {
-            points: 400,
+            points: 200,
             question: "JFK November 22, 1963",
             answer: "What is Dallas?",
             revealed: false,
           },
           {
-            points: 800,
+            points: 400,
             question: "Kim Jong-nam February 13, 2017",
             answer: "What is Kuala Lumpur?",
             revealed: false,
           },
           {
-            points: 1200,
+            points: 600,
             question: "Tupac Shakur September 7, 1996",
             answer: "What is Las Vegas?",
             revealed: false,
           },
           {
-            points: 1600,
+            points: 800,
             question: "Martin Luther King, Jr. April 4, 1968",
             answer: "What is Memphis?",
             revealed: false,
           },
           {
-            points: 2000,
+            points: 1000,
             question: "Benazir Bhutto December 27, 2007",
             answer: "What is Rawalpindi?",
             revealed: false,
