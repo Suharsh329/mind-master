@@ -8,21 +8,39 @@
 </head>
 <body>
     <div class="game-container">
-        <header>
-            <h1>MindMaster</h1>
-            <div class="controls">
-                <button id="new-game">New Game</button>
-                <button id="edit-game">Edit Game</button>
-                <button id="manage-players">Manage Players</button>
-                <button id="prev-board">Previous Board</button>
-                <button id="next-board">Next Board</button>
-                <span id="board-indicator">Board: 1/1</span>
+        <!-- Game Selection Section -->
+        <div id="game-selection-section" class="section">
+            <header class="selection-header">
+                <h1>MindMaster</h1>
+                <p class="subtitle">Choose your game to begin</p>
+            </header>
+            
+            <div id="game-selection" class="game-selection">
+                <h2>Select Game</h2>
+                <div class="game-buttons">
+                    <!-- Game buttons will be dynamically populated -->
+                </div>
             </div>
-        </header>
-        
-        <div id="players-bar" class="players-bar"></div>
-        
-        <div id="board-container"></div>
+        </div>
+
+        <!-- Main Game Section -->
+        <div id="main-game-section" class="section" style="display: none;">
+            <header>
+                <h1>MindMaster</h1>
+                <div class="controls">
+                    <button id="back-to-selection">← Game Selection</button>
+                    <button id="new-game">New Game</button>
+                    <button id="edit-game">Edit Game</button>
+                    <button id="manage-players">Manage Players</button>
+                    <button id="prev-board">Previous Board</button>
+                    <button id="next-board">Next Board</button>
+                    <span id="board-indicator">Board: 1/1</span>
+                </div>
+            </header>
+            
+            <div id="players-bar" class="players-bar"></div>
+            <div id="board-container"></div>
+        </div>
         
         <div id="question-modal" class="modal">
             <div class="modal-content">

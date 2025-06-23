@@ -30,21 +30,98 @@ const adjustScorePointsInput = document.getElementById('adjust-score-points-inpu
 const finalScoresModal = document.getElementById('final-scores-modal');
 const finalScoresList = document.getElementById('final-scores-list');
 
+// Section navigation elements
+const gameSelectionSection = document.getElementById('game-selection-section');
+const mainGameSection = document.getElementById('main-game-section');
+const backToSelectionBtn = document.getElementById('back-to-selection');
+
 // Current question reference
 let currentQuestion = null;
 // let tempBoardsData = null; // Moved to editor.js
 
+// Available game data files - dynamically populated
+let availableGames = [];
+
+let currentGameId = 'gameData'; // Default game
+
+// Section Navigation Functions
+function showGameSelection() {
+    gameSelectionSection.style.display = 'block';
+    mainGameSection.style.display = 'none';
+}
+
+function showMainGame() {
+    gameSelectionSection.style.display = 'none';
+    mainGameSection.style.display = 'block';
+}
+
+// Detect available game data files
+async function detectAvailableGames() {
+    const gameFiles = [];
+    let gameIndex = 1;
+    
+    // Always include the base gameData.js
+    try {
+        const gameDataModule = await import('./gameData.js');
+        gameFiles.push({
+            id: 'gameData',
+            name: 'Game 1',
+            boards: gameDataModule.defaultGameData.boards.length
+        });
+    } catch (error) {
+        console.error('Failed to load gameData.js:', error);
+    }
+    
+    // Try to detect gameData2.js, gameData3.js, etc.
+    let foundNextFile = true;
+    let nextIndex = 2;
+    
+    while (foundNextFile && nextIndex <= 10) { // Limit to prevent infinite loop
+        try {
+            const gameDataModule = await import(`./gameData${nextIndex}.js`);
+            gameFiles.push({
+                id: `gameData${nextIndex}`,
+                name: `Game ${nextIndex}`,
+                boards: gameDataModule.defaultGameData.boards.length
+            });
+            nextIndex++;
+        } catch (error) {
+            // File doesn't exist, stop looking
+            foundNextFile = false;
+        }
+    }
+    
+    availableGames = gameFiles;
+    return gameFiles;
+}
+
 // Initialize game
-document.addEventListener('DOMContentLoaded', () => {
-    loadGame();
+document.addEventListener('DOMContentLoaded', async () => {
+    await detectAvailableGames();
+    renderGameSelection();
+    await loadGame();
     renderPlayers();
     renderBoard();
     setupEventListeners();
     initEditorEventListeners(); // Initialize editor-specific listeners
+    
+    // Check if we should show game selection or main game
+    const hasGameInProgress = localStorage.getItem('mindMasterGameState');
+    if (hasGameInProgress && gameState.players.length > 0) {
+        showMainGame(); // Resume game in progress
+    } else {
+        showGameSelection(); // Start with game selection
+    }
 });
 
 // Load game from localStorage or use default
-function loadGame() {
+async function loadGame() {
+    // Load saved game ID
+    const savedGameId = localStorage.getItem('mindMasterCurrentGame');
+    if (savedGameId) {
+        currentGameId = savedGameId;
+    }
+    
     const savedGame = localStorage.getItem('mindMasterGame');
     if (savedGame) {
         gameState = JSON.parse(savedGame);
@@ -55,13 +132,34 @@ function loadGame() {
             gameState.currentPlayer = null;
         }
     } else {
-        gameState = {
-            currentBoard: 0,
-            boards: JSON.parse(JSON.stringify(defaultGameData.boards)), // Deep copy
-            players: JSON.parse(JSON.stringify(defaultGameData.defaultPlayers)), // Deep copy
-            activePlayer: 0,
-            currentPlayer: null
-        };
+        // Load the appropriate game data based on currentGameId
+        try {
+            let selectedGameData;
+            if (currentGameId === 'gameData2') {
+                const gameDataModule = await import('./gameData2.js');
+                selectedGameData = gameDataModule.defaultGameData;
+            } else {
+                selectedGameData = defaultGameData; // Use already imported gameData.js
+            }
+            
+            gameState = {
+                currentBoard: 0,
+                boards: JSON.parse(JSON.stringify(selectedGameData.boards)), // Deep copy
+                players: JSON.parse(JSON.stringify(selectedGameData.defaultPlayers)), // Deep copy
+                activePlayer: 0,
+                currentPlayer: null
+            };
+        } catch (error) {
+            console.error(`Failed to load game data for ${currentGameId}:`, error);
+            // Fallback to default game data
+            gameState = {
+                currentBoard: 0,
+                boards: JSON.parse(JSON.stringify(defaultGameData.boards)),
+                players: JSON.parse(JSON.stringify(defaultGameData.defaultPlayers)),
+                activePlayer: 0,
+                currentPlayer: null
+            };
+        }
     }
     saveGame(); // Save to ensure structure is current
 }
@@ -69,24 +167,39 @@ function loadGame() {
 // Save game to localStorage - needs to be exportable for editor.js
 export function saveGame() {
     localStorage.setItem('mindMasterGame', JSON.stringify(gameState));
+    localStorage.setItem('mindMasterCurrentGame', currentGameId);
 }
 
 // Setup event listeners (gameplay related)
 function setupEventListeners() {
     // New game button
-    document.getElementById('new-game').addEventListener('click', () => {
+    document.getElementById('new-game').addEventListener('click', async () => {
         if (confirm('Are you sure you want to start a new game? All progress will be lost.')) {
-            gameState = {
-                currentBoard: 0,
-                boards: JSON.parse(JSON.stringify(defaultGameData.boards)),
-                players: gameState.players, // Keep current players, just reset scores
-                activePlayer: gameState.players.length > 0 ? 0 : null,
-                currentPlayer: null
-            };
-            gameState.players.forEach(player => { player.score = 0; });
-            saveGame();
-            renderPlayers();
-            renderBoard();
+            // Load the current game data
+            let selectedGameData;
+            try {
+                if (currentGameId === 'gameData2') {
+                    const gameDataModule = await import('./gameData2.js');
+                    selectedGameData = gameDataModule.defaultGameData;
+                } else {
+                    selectedGameData = defaultGameData;
+                }
+                
+                gameState = {
+                    currentBoard: 0,
+                    boards: JSON.parse(JSON.stringify(selectedGameData.boards)),
+                    players: gameState.players, // Keep current players, just reset scores
+                    activePlayer: gameState.players.length > 0 ? 0 : null,
+                    currentPlayer: null
+                };
+                gameState.players.forEach(player => { player.score = 0; });
+                saveGame();
+                renderPlayers();
+                renderBoard();
+            } catch (error) {
+                console.error('Failed to load game data for new game:', error);
+                alert('Failed to start new game. Please refresh the page.');
+            }
         }
     });
 
@@ -163,21 +276,39 @@ function setupEventListeners() {
     });
 
     // Final Scores Modal Button
-    document.getElementById('final-scores-new-game-btn').addEventListener('click', () => {
+    document.getElementById('final-scores-new-game-btn').addEventListener('click', async () => {
         finalScoresModal.style.display = 'none';
         // Directly call the new game logic from the main button
         // but without the confirmation, as this is a direct action
-        gameState = {
-            currentBoard: 0,
-            boards: JSON.parse(JSON.stringify(defaultGameData.boards)),
-            players: gameState.players, // Keep current players
-            activePlayer: gameState.players.length > 0 ? 0 : null,
-            currentPlayer: null
-        };
-        gameState.players.forEach(player => { player.score = 0; });
-        saveGame();
-        renderPlayers();
-        renderBoard();
+        try {
+            let selectedGameData;
+            if (currentGameId === 'gameData2') {
+                const gameDataModule = await import('./gameData2.js');
+                selectedGameData = gameDataModule.defaultGameData;
+            } else {
+                selectedGameData = defaultGameData;
+            }
+            
+            gameState = {
+                currentBoard: 0,
+                boards: JSON.parse(JSON.stringify(selectedGameData.boards)),
+                players: gameState.players, // Keep current players
+                activePlayer: gameState.players.length > 0 ? 0 : null,
+                currentPlayer: null
+            };
+            gameState.players.forEach(player => { player.score = 0; });
+            saveGame();
+            renderPlayers();
+            renderBoard();
+        } catch (error) {
+            console.error('Failed to load game data for new game:', error);
+            alert('Failed to start new game. Please refresh the page.');
+        }
+    });
+
+    // Back to selection button
+    backToSelectionBtn.addEventListener('click', () => {
+        showGameSelection();
     });
 }
 
@@ -580,4 +711,82 @@ function handleManualScoreChange(isAdding) {
     gameState.activePlayer = playerIndex; // Make the adjusted player active
     renderPlayers();
     saveGame();
+}
+
+// Render game selection buttons
+function renderGameSelection() {
+    const gameSelection = document.getElementById('game-selection');
+    const gameButtons = gameSelection.querySelector('.game-buttons');
+    
+    // Clear existing buttons
+    gameButtons.innerHTML = '';
+    
+    // Load saved game selection
+    const savedGameId = localStorage.getItem('mindMasterCurrentGame');
+    if (savedGameId) {
+        currentGameId = savedGameId;
+    }
+    
+    // Create buttons for each available game
+    availableGames.forEach(game => {
+        const button = document.createElement('button');
+        button.className = 'game-button';
+        button.textContent = game.name;
+        
+        // Add badge for multiple boards
+        if (game.boards > 1) {
+            const badge = document.createElement('span');
+            badge.className = 'badge';
+            badge.textContent = game.boards;
+            button.appendChild(badge);
+        }
+        
+        // Set active state
+        if (game.id === currentGameId) {
+            button.classList.add('active');
+        }
+        
+        // Add click handler
+        button.addEventListener('click', () => selectGame(game.id));
+        
+        gameButtons.appendChild(button);
+    });
+}
+
+// Select a different game
+async function selectGame(gameId) {
+    if (gameId === currentGameId) return;
+    
+    try {
+        // Import the selected game data
+        const gameDataModule = await import(`./${gameId}.js`);
+        const selectedGameData = gameDataModule.defaultGameData;
+        
+        // Update current game
+        currentGameId = gameId;
+        
+        // Reset game state with new data
+        gameState = {
+            currentBoard: 0,
+            boards: JSON.parse(JSON.stringify(selectedGameData.boards)),
+            players: gameState.players, // Keep current players
+            activePlayer: gameState.players.length > 0 ? 0 : null,
+            currentPlayer: null
+        };
+        
+        // Reset player scores
+        gameState.players.forEach(player => { player.score = 0; });
+        
+        saveGame();
+        renderGameSelection(); // Update button states
+        renderPlayers();
+        renderBoard();
+        
+        // Navigate to main game section
+        showMainGame();
+        
+    } catch (error) {
+        console.error(`Failed to load game data from ${gameId}:`, error);
+        alert(`Failed to load ${gameId}. Please check if the file exists.`);
+    }
 }

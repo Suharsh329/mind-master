@@ -112,6 +112,115 @@ button:active {
     border: 1px solid var(--primary-color);
 }
 
+/* Section Management */
+.section {
+    width: 100%;
+    min-height: 100vh;
+}
+
+.selection-header {
+    text-align: center;
+    margin-bottom: 50px;
+    padding: 40px 0;
+}
+
+.selection-header h1 {
+    color: var(--primary-color);
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.selection-header .subtitle {
+    color: var(--text-color);
+    font-size: 1.2rem;
+    opacity: 0.8;
+}
+
+/* Enhanced Game Selection for dedicated section */
+.game-selection {
+    background-color: var(--card-bg-color);
+    padding: 40px;
+    margin: 0 auto;
+    max-width: 800px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    text-align: center;
+}
+
+.game-selection h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.game-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.game-button {
+    position: relative;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 150px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+.game-button:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+}
+
+.game-button.active {
+    background-color: var(--secondary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.game-button .badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #FF4444;
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border: 2px solid white;
+}
+
+/* Navigation Button */
+#back-to-selection {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+}
+
+#back-to-selection:hover {
+    background-color: #E65100;
+}
+
 /* Players Bar */
 .players-bar {
     display: flex;
@@ -602,11 +711,6 @@ button:active {
     padding: 6px 10px; /* Smaller padding for action buttons */
     text-transform: none; /* Normal case for these buttons */
     letter-spacing: 0;
-}
-
-/* Specific button colors for edit/delete if needed */
-.edit-item-btn {
-    /* background-color: var(--primary-color); /* Example */
 }
 
 .delete-item-btn {
