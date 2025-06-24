@@ -58,7 +58,6 @@ function showMainGame() {
 // Detect available game data files
 async function detectAvailableGames() {
     const gameFiles = [];
-    let gameIndex = 1;
     
     // Always include the base gameData.js
     try {
@@ -72,22 +71,24 @@ async function detectAvailableGames() {
         console.error('Failed to load gameData.js:', error);
     }
     
-    // Try to detect gameData2.js, gameData3.js, etc.
-    let foundNextFile = true;
-    let nextIndex = 2;
+    // Manually check for known game files to avoid MIME type errors
+    // This is safer than dynamic detection with non-existent files
+    const knownGameFiles = ['gameData2']; // Add more as you create them: 'gameData3', 'gameData4', etc.
     
-    while (foundNextFile && nextIndex <= 10) { // Limit to prevent infinite loop
+    for (const gameId of knownGameFiles) {
         try {
-            const gameDataModule = await import(`./gameData${nextIndex}.js`);
-            gameFiles.push({
-                id: `gameData${nextIndex}`,
-                name: `Game ${nextIndex}`,
-                boards: gameDataModule.defaultGameData.boards.length
-            });
-            nextIndex++;
+            const gameDataModule = await import(`./${gameId}.js`);
+            if (gameDataModule && gameDataModule.defaultGameData) {
+                const gameNumber = gameId.replace('gameData', '') || '2';
+                gameFiles.push({
+                    id: gameId,
+                    name: `Game ${gameNumber}`,
+                    boards: gameDataModule.defaultGameData.boards.length
+                });
+            }
         } catch (error) {
-            // File doesn't exist, stop looking
-            foundNextFile = false;
+            // File doesn't exist or has an error, skip silently
+            console.log(`${gameId}.js not found or has errors, skipping`);
         }
     }
     
@@ -135,11 +136,11 @@ async function loadGame() {
         // Load the appropriate game data based on currentGameId
         try {
             let selectedGameData;
-            if (currentGameId === 'gameData2') {
-                const gameDataModule = await import('./gameData2.js');
-                selectedGameData = gameDataModule.defaultGameData;
-            } else {
+            if (currentGameId === 'gameData') {
                 selectedGameData = defaultGameData; // Use already imported gameData.js
+            } else {
+                const gameDataModule = await import(`./${currentGameId}.js`);
+                selectedGameData = gameDataModule.defaultGameData;
             }
             
             gameState = {
@@ -755,34 +756,50 @@ function renderGameSelection() {
 
 // Select a different game
 async function selectGame(gameId) {
-    if (gameId === currentGameId) return;
+    const isSameGame = gameId === currentGameId;
+    
+    // If it's the same game and we're already in main game section, do nothing
+    if (isSameGame && mainGameSection.style.display !== 'none') {
+        return;
+    }
     
     try {
-        // Import the selected game data
-        const gameDataModule = await import(`./${gameId}.js`);
-        const selectedGameData = gameDataModule.defaultGameData;
+        let selectedGameData;
+        
+        // Handle the base gameData.js case
+        if (gameId === 'gameData') {
+            selectedGameData = defaultGameData;
+        } else {
+            // Import the selected game data dynamically
+            const gameDataModule = await import(`./${gameId}.js`);
+            selectedGameData = gameDataModule.defaultGameData;
+        }
         
         // Update current game
         currentGameId = gameId;
         
-        // Reset game state with new data
-        gameState = {
-            currentBoard: 0,
-            boards: JSON.parse(JSON.stringify(selectedGameData.boards)),
-            players: gameState.players, // Keep current players
-            activePlayer: gameState.players.length > 0 ? 0 : null,
-            currentPlayer: null
-        };
+        // Only reset game state if it's a different game
+        if (!isSameGame) {
+            // Reset game state with new data
+            gameState = {
+                currentBoard: 0,
+                boards: JSON.parse(JSON.stringify(selectedGameData.boards)),
+                players: gameState.players, // Keep current players
+                activePlayer: gameState.players.length > 0 ? 0 : null,
+                currentPlayer: null
+            };
+            
+            // Reset player scores
+            gameState.players.forEach(player => { player.score = 0; });
+            
+            saveGame();
+            renderPlayers();
+            renderBoard();
+        }
         
-        // Reset player scores
-        gameState.players.forEach(player => { player.score = 0; });
-        
-        saveGame();
         renderGameSelection(); // Update button states
-        renderPlayers();
-        renderBoard();
         
-        // Navigate to main game section
+        // Always navigate to main game section when a game is selected
         showMainGame();
         
     } catch (error) {
