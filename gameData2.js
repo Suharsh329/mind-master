@@ -172,15 +172,15 @@ const defaultGameData = {
           },
           {
             points: 600,
-            question: "This address is where the Simpsons family lives",
-            answer: "What is 742 Evergreen Terrace, Springfield?",
+            question: "This address is of Hercule Poirot's residence in Agatha Christie's novels",
+            answer: "What is Whitehaven Mansions?",
             revealed: false,
           },
           {
             points: 800,
             question:
-              "This address is where SpongeBob SquarePants lives in a pineapple under the sea",
-            answer: "What is 124 Conch Street, Bikini Bottom, Pacific Ocean?",
+              'This is the address of the Bennet family in Jane Austen\'s "Pride and Prejudice"',
+            answer: "What is Longbourn, Hertfordshire?",
             revealed: false,
           },
           {
@@ -259,7 +259,8 @@ const defaultGameData = {
           },
           {
             points: 1600,
-            question: "Hohner makes the Bob Dylan signature model of this instrument that Bob plays",
+            question:
+              "Hohner makes the Bob Dylan signature model of this instrument that Bob plays",
             answer: "What is a harmonica?",
             revealed: false,
           },
@@ -288,7 +289,8 @@ const defaultGameData = {
           },
           {
             points: 1200,
-            question: "He led from 1799 to 1814, took an unwanted vacation, returned & then was gone for good in 1815",
+            question:
+              "He led from 1799 to 1814, took an unwanted vacation, returned & then was gone for good in 1815",
             answer: "Who is Napoleon Bonaparte?",
             revealed: false,
           },
@@ -347,19 +349,22 @@ const defaultGameData = {
         [
           {
             points: 400,
-            question: "Made to be movable, like a 19-inch television with a handle on top",
+            question:
+              "Made to be movable, like a 19-inch television with a handle on top",
             answer: "What is portable?",
             revealed: false,
           },
           {
             points: 800,
-            question: "From Latin 'to sieve', it's what coffee does in some coffeepots",
+            question:
+              "From Latin 'to sieve', it's what coffee does in some coffeepots",
             answer: "What is a percolate?",
             revealed: false,
           },
           {
             points: 1200,
-            question: "4 speakers were used for this type of audio system popular in the 1970s",
+            question:
+              "4 speakers were used for this type of audio system popular in the 1970s",
             answer: "What is quadraphonic?",
             revealed: false,
           },
@@ -371,7 +376,8 @@ const defaultGameData = {
           },
           {
             points: 2000,
-            question: "Of or belonging to the aristocratic families of ancient Rome",
+            question:
+              "Of or belonging to the aristocratic families of ancient Rome",
             answer: "What is a patrician?",
             revealed: false,
           },
