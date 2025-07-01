@@ -3,7 +3,7 @@ const defaultGameData = {
     {
       categories: [
         "JUST NAMES",
-        "CURRENT HITS",
+        "CURRENT HITS (2025)",
         "PLASTICS",
         "JUST MY LUCK",
         "A_A_A",

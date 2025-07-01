@@ -172,7 +172,8 @@ const defaultGameData = {
           },
           {
             points: 600,
-            question: "This address is of Hercule Poirot's residence in Agatha Christie's novels",
+            question:
+              "This address is of Hercule Poirot's residence in Agatha Christie's novels",
             answer: "What is Whitehaven Mansions?",
             revealed: false,
           },
@@ -218,7 +219,7 @@ const defaultGameData = {
           },
           {
             points: 1200,
-            question: "This city was the capital of the Tanzania before Dodoma",
+            question: "This city was the capital of Tanzania before Dodoma",
             answer: "What is Dar es Salaam?",
             revealed: false,
           },
