@@ -573,19 +573,20 @@ function markQuestionRevealed() {
 }
 
 function checkAllQuestionsRevealed() {
-  const currentBoardData = gameState.boards[gameState.currentBoard];
-  let allRevealed = true;
-  for (const category of currentBoardData.questions) {
-    for (const question of category) {
-      if (!question.revealed) {
-        allRevealed = false;
-        break;
+  // Iterate over all boards. This works for one or multiple boards.
+  for (const board of gameState.boards) {
+    for (const category of board.questions) {
+      for (const question of category) {
+        if (!question.revealed) {
+          // If any question on any board is not revealed, we can exit early.
+          return;
+        }
       }
     }
-    if (!allRevealed) break;
   }
 
-  if (allRevealed && gameState.players.length > 0) {
+  // If the loops complete, all questions on all boards are revealed.
+  if (gameState.players.length > 0) {
     showFinalScoresModal();
   }
 }
