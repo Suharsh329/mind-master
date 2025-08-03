@@ -66,7 +66,7 @@ const defaultGameData = {
           {
             points: 800,
             question:
-              "My dear or my beloved in Persian",
+              "Debuted at number three on the UK Singles Chart, it means my dear or my beloved in Persian",
             answer: "What is Azizam?",
             revealed: false,
           },
