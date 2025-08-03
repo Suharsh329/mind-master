@@ -3,7 +3,7 @@ const defaultGameData = {
     {
       categories: [
         "HOMONYMS",
-        "Board Games",
+        "BOARD GAMES",
         "DROPS OF JUPITER",
         "JUMP FOR JOY",
         "_A_A_A",
