@@ -98,15 +98,15 @@ const defaultGameData = {
           {
             points: 600,
             question:
-              "Named for a Trojan hero, it's the largest of Jupiter's Galilean moons., which is also the largest moon in the solar system",
+              "Named for a Trojan hero, it's the largest of Jupiter's Galilean moons, which is also the largest moon in the solar system",
             answer: "What is Ganymede?",
             revealed: false,
           },
           {
             points: 800,
             question:
-              " It takes over 11 years for Jupiter to orbit the Sun at 5.2 AU, short for these",
-            answer: "What is astronomical units?",
+              "It takes over 11 years for Jupiter to orbit the Sun at 5.2 AU, short for these",
+            answer: "What are astronomical units?",
             revealed: false,
           },
           {
@@ -127,7 +127,7 @@ const defaultGameData = {
           {
             points: 400,
             question:
-              " If your car's battery dies, hope you have a pair of these.",
+              "If your car's battery dies, hope you have a pair of these.",
             answer: "What are jumper cables?",
             revealed: false,
           },
@@ -141,7 +141,7 @@ const defaultGameData = {
           {
             points: 800,
             question:
-              "Roots” is responsible for reviving this African-American wedding custom.",
+              "'Roots' is responsible for reviving this African-American wedding custom.",
             answer: "What is jumping the broom?",
             revealed: false,
           },
