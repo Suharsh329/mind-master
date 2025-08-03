@@ -66,8 +66,8 @@ const defaultGameData = {
           {
             points: 800,
             question:
-              "'Just Keep Watching' this Canadian singer and dancer who landed both her first #1 album, 'So Close To What', and #1 single, 'What I Want' with Morgan Wallen, in 2025",
-            answer: "Who is Tate McRae?",
+              "My dear or my beloved in Persian",
+            answer: "What is Azizam?",
             revealed: false,
           },
           {
