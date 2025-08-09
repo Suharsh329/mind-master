@@ -1,8 +1,27 @@
 const defaultGameData = {
   boards: [
     {
-      categories: ["", "", "", "", ""],
-      questions: [[], [], [], [], []],
+      categories: [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      questions: [
+        [
+          {
+            points: 200,
+            question: "",
+            answer: "",
+            revealed: false,
+          }
+        ],
+        [],
+        [],
+        [],
+        []
+      ],
     },
   ],
   defaultPlayers: [
