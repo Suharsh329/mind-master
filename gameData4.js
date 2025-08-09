@@ -344,7 +344,7 @@ const defaultGameData = {
           },
           {
             points: 1200,
-            question: "This word can either mean a single wheeled vehicle or a large group of people all traveling together.",
+            question: "This word can either mean a trailer or a large group of people all traveling together.",
             answer: "What is a caravan?",
             revealed: false,
           },
