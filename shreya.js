@@ -50,7 +50,7 @@ const defaultGameData = {
           },
 {
             points: 400,
-            question: "I wanted to become this before I pursued Chemical Enginenering?",
+            question: "I wanted to become this before I pursued Chemical Engineering?",
             answer: "Doctor",
             revealed: false,
           },
