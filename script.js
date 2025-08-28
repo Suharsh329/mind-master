@@ -77,7 +77,7 @@ async function detectAvailableGames() {
 
   // Manually check for known game files to avoid MIME type errors
   // This is safer than dynamic detection with non-existent files
-  const knownGameFiles = ["gameData2", "shreya"]; // Add more as you create them: 'gameData3', 'gameData4', etc.
+  const knownGameFiles = ["gameData2",]; // Add more as you create them: 'gameData3', 'gameData4', etc.
 
   for (const gameId of knownGameFiles) {
     try {
