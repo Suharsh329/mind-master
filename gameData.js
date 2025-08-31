@@ -15,12 +15,160 @@ const defaultGameData = {
             question: "",
             answer: "",
             revealed: false,
+          },
+          {
+            points: 400,
+            question: "",
+            answer: "",
+            revealed: false,
+          },
+          {
+            points: 600,
+            question: "",
+            answer: "",
+            revealed: false,
+          },
+          {
+            points: 800,
+            question: "",
+            answer: "",
+            revealed: false,
+          },
+          {
+            points: 1000,
+            question: "",
+            answer: "",
+            revealed: false,
           }
         ],
-        [],
-        [],
-        [],
-        []
+        [
+          {
+            points: 200,
+            question: "",
+            answer: "",
+            revealed: false,
+          },
+          {
+            points: 400,
+            question: "",
+            answer: "",
+            revealed: false,
+          },
+          {
+            points: 600,
+            question: "",
+            answer: "",
+            revealed: false,
+          },
+          {
+            points: 800,
+            question: "",
+            answer: "",
+            revealed: false,
+          },
+          {
+            points: 1000,
+            question: "",
+            answer: "",
+            revealed: false,
+          }
+        ],
+        [
+          {
+            points: 200,
+            question: "",
+            answer: "",
+            revealed: false,
+          },
+          {
+            points: 400,
+            question: "",
+            answer: "",
+            revealed: false,
+          },
+          {
+            points: 600,
+            question: "",
+            answer: "",
+            revealed: false,
+          },
+          {
+            points: 800,
+            question: "",
+            answer: "",
+            revealed: false,
+          },
+          {
+            points: 1000,
+            question: "",
+            answer: "",
+            revealed: false,
+          }
+        ],
+        [
+          {
+            points: 200,
+            question: "",
+            answer: "",
+            revealed: false,
+          },
+          {
+            points: 400,
+            question: "",
+            answer: "",
+            revealed: false,
+          },
+          {
+            points: 600,
+            question: "",
+            answer: "",
+            revealed: false,
+          },
+          {
+            points: 800,
+            question: "",
+            answer: "",
+            revealed: false,
+          },
+          {
+            points: 1000,
+            question: "",
+            answer: "",
+            revealed: false,
+          }
+        ],
+        [
+          {
+            points: 200,
+            question: "",
+            answer: "",
+            revealed: false,
+          },
+          {
+            points: 400,
+            question: "",
+            answer: "",
+            revealed: false,
+          },
+          {
+            points: 600,
+            question: "",
+            answer: "",
+            revealed: false,
+          },
+          {
+            points: 800,
+            question: "",
+            answer: "",
+            revealed: false,
+          },
+          {
+            points: 1000,
+            question: "",
+            answer: "",
+            revealed: false,
+          }
+        ]
       ],
     },
   ],
