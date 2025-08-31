@@ -45,8 +45,8 @@ const defaultGameData = {
           {
             points: 200,
             question:
-              "Spending 13 weeks on top, the name of this Kendrick Lamar and SZA track references an R&B legend who was 'Never Too Much'",
-            answer: "What is Luther?",
+              "Released on August 29, this song critiquing an immature ex-boyfriend charted at number one in Ireland, the UK and the US.",
+            answer: "What is Manchild?",
             revealed: false,
           },
           {
