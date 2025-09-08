@@ -1,15 +1,15 @@
 /* General Styles */
 :root {
-    --primary-color: #6A1B9A; /* Purple */
-    --secondary-color: #FF6F00; /* Orange */
-    --background-color: #F3E5F5; /* Light Purple */
+    --primary-color: #6a1b9a; /* Purple */
+    --secondary-color: #ff6f00; /* Orange */
+    --background-color: #f3e5f5; /* Light Purple */
     --text-color: #333;
     --card-bg-color: #fff;
-    --card-text-color: #6A1B9A;
-    --button-bg-color: #FF6F00;
+    --card-text-color: #6a1b9a;
+    --button-bg-color: #ff6f00;
     --button-text-color: #fff;
     --modal-bg-color: #fff;
-    --modal-header-bg-color: #6A1B9A;
+    --modal-header-bg-color: #6a1b9a;
     --modal-header-text-color: #fff;
 }
 
@@ -20,7 +20,7 @@
 }
 
 body {
-    font-family: 'Roboto', 'Arial', sans-serif;
+    font-family: "Roboto", "Arial", sans-serif;
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
@@ -51,7 +51,8 @@ h1 {
     font-size: 2.5em; /* Larger font size */
 }
 
-h2, h3 {
+h2,
+h3 {
     color: var(--modal-header-text-color); /* Changed to use variable */
     margin-bottom: 15px;
 }
@@ -72,7 +73,9 @@ button {
     border: none;
     border-radius: 5px; /* Slightly more rounded corners */
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+    transition:
+        background-color 0.3s,
+        transform 0.2s;
     font-weight: bold;
     text-transform: uppercase; /* Uppercase text */
     letter-spacing: 0.5px; /* Added letter spacing */
@@ -80,27 +83,27 @@ button {
 }
 
 button:hover {
-    background-color: #E65100; /* Darker shade of orange */
+    background-color: #e65100; /* Darker shade of orange */
     transform: translateY(-2px); /* Slight lift effect */
 }
 
 button:active {
-    background-color: #BF360C; /* Even darker orange */
+    background-color: #bf360c; /* Even darker orange */
     transform: translateY(0);
 }
 
 /* Warning button style for penalizing */
 .btn-warning {
-    background-color: #D32F2F; /* A cautionary red */
+    background-color: #d32f2f; /* A cautionary red */
     color: white;
 }
 
 .btn-warning:hover {
-    background-color: #C62828; /* Darker red on hover */
+    background-color: #c62828; /* Darker red on hover */
 }
 
 .btn-warning:active {
-    background-color: #B71C1C;
+    background-color: #b71c1c;
 }
 
 #board-indicator {
@@ -128,7 +131,7 @@ button:active {
     color: var(--primary-color);
     font-size: 3rem;
     margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .selection-header .subtitle {
@@ -144,7 +147,7 @@ button:active {
     margin: 0 auto;
     max-width: 800px;
     border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     text-align: center;
 }
 
@@ -173,13 +176,13 @@ button:active {
     cursor: pointer;
     transition: all 0.3s ease;
     min-width: 150px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
 .game-button:hover {
     background-color: var(--secondary-color);
     transform: translateY(-2px);
-    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 }
 
 .game-button.active {
@@ -191,7 +194,7 @@ button:active {
     position: absolute;
     top: -8px;
     right: -8px;
-    background-color: #FF4444;
+    background-color: #ff4444;
     color: white;
     border-radius: 50%;
     width: 24px;
@@ -218,7 +221,7 @@ button:active {
 }
 
 #back-to-selection:hover {
-    background-color: #E65100;
+    background-color: #e65100;
 }
 
 /* Players Bar */
@@ -250,13 +253,15 @@ button:active {
     border-radius: 5px; /* Matched button radius */
     text-align: center;
     min-width: 140px; /* Reduced min-width */
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
 }
 
 .player-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     cursor: pointer;
 }
 
@@ -302,7 +307,7 @@ button:active {
     align-items: center;
     justify-content: center;
     font-size: 1.1em; /* Slightly larger font */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .card {
@@ -318,19 +323,22 @@ button:active {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition:
+        transform 0.2s,
+        background-color 0.2s,
+        box-shadow 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border: 1px solid #ddd;
 }
 
 .card:hover {
     transform: scale(1.05); /* Slightly larger scale on hover */
     background-color: #fdfdfd;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .card.revealed {
-    background-color: #BDBDBD; /* Neutral gray for revealed cards */
+    background-color: #bdbdbd; /* Neutral gray for revealed cards */
     color: #757575;
     cursor: default;
     font-size: 1em; /* Smaller text for revealed state if needed */
@@ -339,8 +347,8 @@ button:active {
 
 .card.revealed:hover {
     transform: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    background-color: #BDBDBD;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #bdbdbd;
 }
 
 /* Modal Styles */
@@ -365,7 +373,7 @@ button:active {
     margin: 5vh auto; /* Centered with vertical margin */
     padding: 0; /* Remove padding, will be handled by inner elements */
     border-radius: 8px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
     display: flex;
     flex-direction: column;
 }
@@ -610,7 +618,9 @@ button:active {
     border: none;
     border-bottom: 3px solid transparent;
     cursor: pointer;
-    transition: color 0.2s, border-bottom-color 0.2s;
+    transition:
+        color 0.2s,
+        border-bottom-color 0.2s;
     font-size: 1em;
     text-transform: uppercase; /* Match other buttons */
     letter-spacing: 0.5px; /* Match other buttons */
@@ -663,7 +673,9 @@ button:active {
     resize: vertical;
 }
 
-#boards-list, #categories-list, #questions-list {
+#boards-list,
+#categories-list,
+#questions-list {
     margin-bottom: 20px;
     max-height: 250px;
     overflow-y: auto;
@@ -714,13 +726,15 @@ button:active {
 }
 
 .delete-item-btn {
-    background-color: #E53935; /* A modern red for delete */
+    background-color: #e53935; /* A modern red for delete */
 }
 .delete-item-btn:hover {
-    background-color: #C62828; /* Darker red on hover */
+    background-color: #c62828; /* Darker red on hover */
 }
 
-.add-question-form, .add-category-form, .add-player-form {
+.add-question-form,
+.add-category-form,
+.add-player-form {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -731,7 +745,9 @@ button:active {
     margin-top: 15px;
 }
 
-.add-question-form h3, .add-category-form h3, .add-player-form h3 {
+.add-question-form h3,
+.add-category-form h3,
+.add-player-form h3 {
     margin-top: 0;
     margin-bottom: 10px;
     color: var(--primary-color);
@@ -742,11 +758,11 @@ button:active {
     .game-container {
         padding: 10px;
     }
-    
+
     h1 {
         font-size: 2em;
     }
-    
+
     .controls {
         flex-direction: column;
         gap: 8px;
@@ -796,11 +812,11 @@ button:active {
     .modal-footer button {
         width: 100%;
     }
-    
+
     .question-text {
         font-size: 1.3em;
     }
-    
+
     .tabs {
         flex-wrap: wrap; /* Allow tabs to wrap */
     }

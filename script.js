@@ -25,12 +25,8 @@ const playerButtons = document.getElementById("player-buttons");
 const postRevealActions = document.getElementById("post-reveal-actions");
 const playerButtonsPost = document.getElementById("player-buttons-post");
 const adjustScoreModal = document.getElementById("adjust-score-modal");
-const adjustScorePlayerSelect = document.getElementById(
-  "adjust-score-player-select"
-);
-const adjustScorePointsInput = document.getElementById(
-  "adjust-score-points-input"
-);
+const adjustScorePlayerSelect = document.getElementById("adjust-score-player-select");
+const adjustScorePointsInput = document.getElementById("adjust-score-points-input");
 const finalScoresModal = document.getElementById("final-scores-modal");
 const finalScoresList = document.getElementById("final-scores-list");
 
@@ -77,7 +73,7 @@ async function detectAvailableGames() {
 
   // Manually check for known game files to avoid MIME type errors
   // This is safer than dynamic detection with non-existent files
-  const knownGameFiles = ["gameData2",]; // Add more as you create them: 'gameData3', 'gameData4', etc.
+  const knownGameFiles = ["gameData2"]; // Add more as you create them: 'gameData3', 'gameData4', etc.
 
   for (const gameId of knownGameFiles) {
     try {
@@ -130,10 +126,7 @@ async function loadGame() {
   const savedGame = localStorage.getItem("mindMasterGame");
   if (savedGame) {
     gameState = JSON.parse(savedGame);
-    if (
-      !gameState.hasOwnProperty("activePlayer") &&
-      gameState.players.length > 0
-    ) {
+    if (!gameState.hasOwnProperty("activePlayer") && gameState.players.length > 0) {
       gameState.activePlayer = 0;
     }
     if (!gameState.hasOwnProperty("currentPlayer")) {
@@ -183,11 +176,7 @@ export function saveGame() {
 function setupEventListeners() {
   // New game button
   document.getElementById("new-game").addEventListener("click", async () => {
-    if (
-      confirm(
-        "Are you sure you want to start a new game? All progress will be lost."
-      )
-    ) {
+    if (confirm("Are you sure you want to start a new game? All progress will be lost.")) {
       // Load the current game data
       let selectedGameData;
       try {
@@ -237,25 +226,17 @@ function setupEventListeners() {
   });
 
   // Manage Players button
-  document
-    .getElementById("manage-players")
-    .addEventListener("click", openPlayerModal);
-  document
-    .getElementById("close-player-modal")
-    .addEventListener("click", () => {
-      playerModal.style.display = "none";
-    });
+  document.getElementById("manage-players").addEventListener("click", openPlayerModal);
+  document.getElementById("close-player-modal").addEventListener("click", () => {
+    playerModal.style.display = "none";
+  });
   document.getElementById("add-player").addEventListener("click", addPlayer);
-  document
-    .getElementById("new-player-name")
-    .addEventListener("keypress", (e) => {
-      if (e.key === "Enter") addPlayer();
-    });
+  document.getElementById("new-player-name").addEventListener("keypress", (e) => {
+    if (e.key === "Enter") addPlayer();
+  });
 
   // Edit Game button - calls imported function
-  document
-    .getElementById("edit-game")
-    .addEventListener("click", openGameEditor);
+  document.getElementById("edit-game").addEventListener("click", openGameEditor);
 
   // Question Modal Listeners
   const closeQuestionModalBtn = document.getElementById("close-modal-question");
@@ -274,76 +255,62 @@ function setupEventListeners() {
     e.stopPropagation();
     revealAnswerAndShowActions();
   });
-  document
-    .getElementById("award-points-correct")
-    .addEventListener("click", (e) => {
-      e.stopPropagation();
-      handleScoreAdjustment(true);
-    });
-  document
-    .getElementById("deduct-points-incorrect")
-    .addEventListener("click", (e) => {
-      e.stopPropagation();
-      handleScoreAdjustment(false);
-    });
-  document
-    .getElementById("penalize-incorrect-pre-reveal")
-    .addEventListener("click", (e) => {
-      e.stopPropagation();
-      handlePreRevealPenalty();
-    });
+  document.getElementById("award-points-correct").addEventListener("click", (e) => {
+    e.stopPropagation();
+    handleScoreAdjustment(true);
+  });
+  document.getElementById("deduct-points-incorrect").addEventListener("click", (e) => {
+    e.stopPropagation();
+    handleScoreAdjustment(false);
+  });
+  document.getElementById("penalize-incorrect-pre-reveal").addEventListener("click", (e) => {
+    e.stopPropagation();
+    handlePreRevealPenalty();
+  });
 
   // Adjust Score Modal Listeners
-  document
-    .getElementById("close-adjust-score-modal")
-    .addEventListener("click", () => {
-      adjustScoreModal.style.display = "none";
-    });
-  document
-    .getElementById("adjust-score-add-btn")
-    .addEventListener("click", () => {
-      handleManualScoreChange(true);
-    });
-  document
-    .getElementById("adjust-score-deduct-btn")
-    .addEventListener("click", () => {
-      handleManualScoreChange(false);
-    });
+  document.getElementById("close-adjust-score-modal").addEventListener("click", () => {
+    adjustScoreModal.style.display = "none";
+  });
+  document.getElementById("adjust-score-add-btn").addEventListener("click", () => {
+    handleManualScoreChange(true);
+  });
+  document.getElementById("adjust-score-deduct-btn").addEventListener("click", () => {
+    handleManualScoreChange(false);
+  });
 
   // Final Scores Modal Button
-  document
-    .getElementById("final-scores-new-game-btn")
-    .addEventListener("click", async () => {
-      finalScoresModal.style.display = "none";
-      // Directly call the new game logic from the main button
-      // but without the confirmation, as this is a direct action
-      try {
-        let selectedGameData;
-        if (currentGameId === "gameData2") {
-          const gameDataModule = await import("./gameData2.js");
-          selectedGameData = gameDataModule.defaultGameData;
-        } else {
-          selectedGameData = defaultGameData;
-        }
-
-        gameState = {
-          currentBoard: 0,
-          boards: JSON.parse(JSON.stringify(selectedGameData.boards)),
-          players: gameState.players, // Keep current players
-          activePlayer: gameState.players.length > 0 ? 0 : null,
-          currentPlayer: null,
-        };
-        gameState.players.forEach((player) => {
-          player.score = 0;
-        });
-        saveGame();
-        renderPlayers();
-        renderBoard();
-      } catch (error) {
-        console.error("Failed to load game data for new game:", error);
-        alert("Failed to start new game. Please refresh the page.");
+  document.getElementById("final-scores-new-game-btn").addEventListener("click", async () => {
+    finalScoresModal.style.display = "none";
+    // Directly call the new game logic from the main button
+    // but without the confirmation, as this is a direct action
+    try {
+      let selectedGameData;
+      if (currentGameId === "gameData2") {
+        const gameDataModule = await import("./gameData2.js");
+        selectedGameData = gameDataModule.defaultGameData;
+      } else {
+        selectedGameData = defaultGameData;
       }
-    });
+
+      gameState = {
+        currentBoard: 0,
+        boards: JSON.parse(JSON.stringify(selectedGameData.boards)),
+        players: gameState.players, // Keep current players
+        activePlayer: gameState.players.length > 0 ? 0 : null,
+        currentPlayer: null,
+      };
+      gameState.players.forEach((player) => {
+        player.score = 0;
+      });
+      saveGame();
+      renderPlayers();
+      renderBoard();
+    } catch (error) {
+      console.error("Failed to load game data for new game:", error);
+      alert("Failed to start new game. Please refresh the page.");
+    }
+  });
 
   // Back to selection button
   backToSelectionBtn.addEventListener("click", () => {
@@ -357,9 +324,7 @@ function renderPlayers() {
 
   gameState.players.forEach((player, index) => {
     const playerCard = document.createElement("div");
-    playerCard.className = `player-card ${
-      index === gameState.activePlayer ? "active-player" : ""
-    }`;
+    playerCard.className = `player-card ${index === gameState.activePlayer ? "active-player" : ""}`;
 
     playerCard.innerHTML = `
             <div class="player-name">${player.name}</div>
@@ -392,11 +357,7 @@ function renderPlayers() {
 // Render the current board - needs to be exportable for editor.js
 export function renderBoard() {
   boardContainer.innerHTML = "";
-  if (
-    !gameState.boards ||
-    gameState.boards.length === 0 ||
-    !gameState.boards[gameState.currentBoard]
-  ) {
+  if (!gameState.boards || gameState.boards.length === 0 || !gameState.boards[gameState.currentBoard]) {
     boardContainer.innerHTML =
       '<p style="text-align:center;">No game data loaded or board is empty. Try starting a new game or editing game data.</p>';
     boardIndicator.textContent = "Board: 0/0";
@@ -404,9 +365,7 @@ export function renderBoard() {
   }
   const currentBoardData = gameState.boards[gameState.currentBoard];
 
-  boardIndicator.textContent = `Board: ${gameState.currentBoard + 1}/${
-    gameState.boards.length
-  }`;
+  boardIndicator.textContent = `Board: ${gameState.currentBoard + 1}/${gameState.boards.length}`;
 
   currentBoardData.categories.forEach((category) => {
     const categoryElement = document.createElement("div");
@@ -418,10 +377,7 @@ export function renderBoard() {
   for (let row = 0; row < 5; row++) {
     for (let col = 0; col < 5; col++) {
       // Ensure questions exist for this col/row
-      if (
-        currentBoardData.questions[col] &&
-        currentBoardData.questions[col][row]
-      ) {
+      if (currentBoardData.questions[col] && currentBoardData.questions[col][row]) {
         const questionData = currentBoardData.questions[col][row];
         const card = document.createElement("div");
         card.className = questionData.revealed ? "card revealed" : "card";
@@ -530,10 +486,7 @@ function handlePreRevealPenalty() {
   renderPlayers();
   saveGame();
 
-  answerReveal.textContent =
-    "Penalty applied to " +
-    gameState.players[gameState.currentPlayer].name +
-    ".";
+  answerReveal.textContent = "Penalty applied to " + gameState.players[gameState.currentPlayer].name + ".";
   answerReveal.style.display = "block";
 }
 
@@ -566,9 +519,7 @@ function handleScoreAdjustment(isCorrect) {
 function markQuestionRevealed() {
   if (!currentQuestion) return;
 
-  gameState.boards[gameState.currentBoard].questions[
-    currentQuestion.categoryIndex
-  ][currentQuestion.questionIndex].revealed = true;
+  gameState.boards[gameState.currentBoard].questions[currentQuestion.categoryIndex][currentQuestion.questionIndex].revealed = true;
   saveGame();
 }
 
@@ -726,11 +677,7 @@ function openAdjustScoreModal(playerIndex) {
   // playerIndex can be the active player or undefined initially
   adjustScorePlayerSelect.innerHTML = ""; // Clear previous options
   let targetPlayerIndex = playerIndex;
-  if (
-    targetPlayerIndex === null ||
-    targetPlayerIndex === undefined ||
-    targetPlayerIndex >= gameState.players.length
-  ) {
+  if (targetPlayerIndex === null || targetPlayerIndex === undefined || targetPlayerIndex >= gameState.players.length) {
     targetPlayerIndex = gameState.players.length > 0 ? 0 : -1; // Default to first player or -1 if no players
   }
 
@@ -755,11 +702,7 @@ function handleManualScoreChange(isAdding) {
   const playerIndex = parseInt(adjustScorePlayerSelect.value);
   let points = parseInt(adjustScorePointsInput.value);
 
-  if (
-    isNaN(playerIndex) ||
-    playerIndex < 0 ||
-    playerIndex >= gameState.players.length
-  ) {
+  if (isNaN(playerIndex) || playerIndex < 0 || playerIndex >= gameState.players.length) {
     alert("Invalid player selected.");
     return;
   }

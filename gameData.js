@@ -1,13 +1,7 @@
 const defaultGameData = {
   boards: [
     {
-      categories: [
-        "",
-        "",
-        "",
-        "",
-        ""
-      ],
+      categories: ["", "", "", "", ""],
       questions: [
         [
           {
@@ -39,7 +33,7 @@ const defaultGameData = {
             question: "",
             answer: "",
             revealed: false,
-          }
+          },
         ],
         [
           {
@@ -71,7 +65,7 @@ const defaultGameData = {
             question: "",
             answer: "",
             revealed: false,
-          }
+          },
         ],
         [
           {
@@ -103,7 +97,7 @@ const defaultGameData = {
             question: "",
             answer: "",
             revealed: false,
-          }
+          },
         ],
         [
           {
@@ -135,7 +129,7 @@ const defaultGameData = {
             question: "",
             answer: "",
             revealed: false,
-          }
+          },
         ],
         [
           {
@@ -167,8 +161,8 @@ const defaultGameData = {
             question: "",
             answer: "",
             revealed: false,
-          }
-        ]
+          },
+        ],
       ],
     },
   ],

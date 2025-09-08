@@ -1,13 +1,7 @@
 const defaultGameData = {
   boards: [
     {
-      categories: [
-        "ALL ABOUT NASA",
-        "JOB DESCRIPTION",
-        "THE HUMAN BODY",
-        "ANIMALS",
-        "SCOTT FREE"
-      ],
+      categories: ["ALL ABOUT NASA", "JOB DESCRIPTION", "THE HUMAN BODY", "ANIMALS", "SCOTT FREE"],
       questions: [
         [
           {
@@ -39,7 +33,7 @@ const defaultGameData = {
             question: "Named for the Greek nature goddess, this NASA program plans to land a woman on the Moon by 2027.",
             answer: "What is Artemis?",
             revealed: false,
-          }
+          },
         ],
         [
           {
@@ -71,7 +65,7 @@ const defaultGameData = {
             question: "medieval living; routinely work with dripping wax; could it be any hotter?",
             answer: "What is a chandler?",
             revealed: false,
-          }
+          },
         ],
         [
           {
@@ -100,10 +94,11 @@ const defaultGameData = {
           },
           {
             points: 1000,
-            question: "These two ligaments, one posterior & one anterior, stabilize the knee & get their name from the fact that they cross in a 'X' shape",
+            question:
+              "These two ligaments, one posterior & one anterior, stabilize the knee & get their name from the fact that they cross in a 'X' shape",
             answer: "What are the cruciate ligaments?",
             revealed: false,
-          }
+          },
         ],
         [
           {
@@ -120,7 +115,8 @@ const defaultGameData = {
           },
           {
             points: 600,
-            question: "The giant shipworm comes out of its shell, & the bacteria inside allow it to digest the sulfur compound in the mud around it; it's not actually a worm, but from this shelled phylum",
+            question:
+              "The giant shipworm comes out of its shell, & the bacteria inside allow it to digest the sulfur compound in the mud around it; it's not actually a worm, but from this shelled phylum",
             answer: "What is a mollusk?",
             revealed: false,
           },
@@ -135,7 +131,7 @@ const defaultGameData = {
             question: "In 2017 the oldest this type of aquatic mammal in captivity died at age 69 in a Florida county of the same name",
             answer: "What is a manatee?",
             revealed: false,
-          }
+          },
         ],
         [
           {
@@ -146,7 +142,8 @@ const defaultGameData = {
           },
           {
             points: 400,
-            question: "Real name Jacques Bermon Webster, this rapper faced controversy after ten people died at his Astroworld Festival performance in 2021.",
+            question:
+              "Real name Jacques Bermon Webster, this rapper faced controversy after ten people died at his Astroworld Festival performance in 2021.",
             answer: "Who is Travis Scott?",
             revealed: false,
           },
@@ -164,11 +161,12 @@ const defaultGameData = {
           },
           {
             points: 1000,
-            question: "This 19th century Romanticist authored the then-popular Waverly Novels, which included Rob Roy and Ivanhoe, but didn't claim authorship until 1827, five years before his death.",
+            question:
+              "This 19th century Romanticist authored the then-popular Waverly Novels, which included Rob Roy and Ivanhoe, but didn't claim authorship until 1827, five years before his death.",
             answer: "Who is Sir Walter Scott?",
             revealed: false,
-          }
-        ]
+          },
+        ],
       ],
     },
   ],

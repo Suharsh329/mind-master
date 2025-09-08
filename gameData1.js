@@ -2,13 +2,7 @@
 const defaultGameData = {
   boards: [
     {
-      categories: [
-        "HOMOPHONIC PAIRS",
-        "MY 'MAN'!",
-        "CHECK YOUR CALENDAR",
-        "A CONTAINER FULL OF WORDS",
-        "GET YOUR GROUP ON",
-      ],
+      categories: ["HOMOPHONIC PAIRS", "MY 'MAN'!", "CHECK YOUR CALENDAR", "A CONTAINER FULL OF WORDS", "GET YOUR GROUP ON"],
       questions: [
         [
           {
@@ -58,23 +52,20 @@ const defaultGameData = {
           },
           {
             points: 600,
-            question:
-              "It's your destiny to know this 8-letter word means 'to show plainly'",
+            question: "It's your destiny to know this 8-letter word means 'to show plainly'",
             answer: "What is manifest?",
             revealed: false,
           },
           {
             points: 800,
-            question:
-              "A royal command, or one from a superior court to a lower one",
+            question: "A royal command, or one from a superior court to a lower one",
             answer: "What is a mandate?",
             revealed: false,
           },
 
           {
             points: 1000,
-            question:
-              "It conveys air & fuel from the carburetor to the cylinders",
+            question: "It conveys air & fuel from the carburetor to the cylinders",
             answer: "What is a manifold?",
             revealed: false,
           },
@@ -83,36 +74,31 @@ const defaultGameData = {
         [
           {
             points: 200,
-            question:
-              "Colorful nickname for November 28, 2025, knowing that Thanksgiving is November 27",
+            question: "Colorful nickname for November 28, 2025, knowing that Thanksgiving is November 27",
             answer: "What is Black Friday?",
             revealed: false,
           },
           {
             points: 400,
-            question:
-              "You are this sign of the zodiac if your birthday falls between December 22 & January 19",
+            question: "You are this sign of the zodiac if your birthday falls between December 22 & January 19",
             answer: "What is a Capricorn?",
             revealed: false,
           },
           {
             points: 600,
-            question:
-              "Bastille Day, Parents' Day & Nelson Mandela Day are all observed during this month",
+            question: "Bastille Day, Parents' Day & Nelson Mandela Day are all observed during this month",
             answer: "What is July?",
             revealed: false,
           },
           {
             points: 800,
-            question:
-              "Place your bets--this sporting event established in 1875 takes place the first Saturday in May",
+            question: "Place your bets--this sporting event established in 1875 takes place the first Saturday in May",
             answer: "What is the Kentucky Derby?",
             revealed: false,
           },
           {
             points: 1000,
-            question:
-              "Commemorating an event from 1777, June 14 is this holiday in the U.S.",
+            question: "Commemorating an event from 1777, June 14 is this holiday in the U.S.",
             answer: "What is Flag Day?",
             revealed: false,
           },
@@ -120,36 +106,31 @@ const defaultGameData = {
         [
           {
             points: 200,
-            question:
-              "A woven container, or the structure under a hot air balloon for the crew & equipment",
+            question: "A woven container, or the structure under a hot air balloon for the crew & equipment",
             answer: "What is a basket?",
             revealed: false,
           },
           {
             points: 400,
-            question:
-              "A handbag; it can also refer to the prize money in a boxing match",
+            question: "A handbag; it can also refer to the prize money in a boxing match",
             answer: "What is a purse?",
             revealed: false,
           },
           {
             points: 600,
-            question:
-              "Wearable term for the box from which cards are dealt for blackjack in a casino",
+            question: "Wearable term for the box from which cards are dealt for blackjack in a casino",
             answer: "What is a shoe?",
             revealed: false,
           },
           {
             points: 800,
-            question:
-              "This small glass container can begin with 'v' or with 'ph'",
+            question: "This small glass container can begin with 'v' or with 'ph'",
             answer: "What is a vial (phial)?",
             revealed: false,
           },
           {
             points: 1000,
-            question:
-              "From the Latin for 'box', it's an underground reservoir for collecting rainwater",
+            question: "From the Latin for 'box', it's an underground reservoir for collecting rainwater",
             answer: "What is a cistern?",
             revealed: false,
           },
